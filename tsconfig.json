@@ -31,7 +31,8 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.html"
+    "src/**/*.html",
+    "src/**/*.css"
   ],
   "exclude": [
     "node_modules"

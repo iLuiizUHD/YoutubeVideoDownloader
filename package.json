@@ -3,17 +3,18 @@
   "version": "1.0.1",
   "description": "The simplest way of downloading videos from YouTube.",
   "scripts": {
-    "build": "tsc && copyfiles -f src/app/*.html dist/app",
-    "watch": "tsc -w && copyfiles -f src/app/*.html dist/app",
+    "build": "tsc && copyfiles -f src/app/*.html src/app/styles/*.css dist/app",
+    "watch": "tsc -w && copyfiles -f src/app/*.html src/app/styles/*.css dist/app",
     "lint": "eslint -c .eslintrc --ext .ts ./src",
     "start": "npm run build && electron ./dist/main.js"
   },
+  "license": "MIT",
   "devDependencies": {
-    "electron": "^12.0.0",
-    "typescript": "^4.2.2",
+    "@types/vue": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
     "dotenv-cli": "^4.0.0",
+    "electron": "^12.0.0",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-config-standard": "^16.0.2",
@@ -21,14 +22,13 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-promise": "^4.3.1",
-    "eslint-plugin-simple-import-sort": "^7.0.0"
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.2"
   },
   "dependencies": {
     "fs-extra": "^9.1.0",
     "googleapis": "^67.1.1",
-    "postcss": "^8.2.6",
-    "prettier": "^2.2.1",
-    "tailwindcss": "^2.0.3",
     "vue": "^2.6.12",
     "ytdl-core": "^4.5.0",
     "yup": "^0.32.9"
