@@ -1,1 +1,3 @@
-console.log("It works");
+const youtube = "hello";
+
+export default youtube;

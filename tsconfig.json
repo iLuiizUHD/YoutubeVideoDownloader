@@ -1,21 +1,18 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "esnext",
+    "target": "ESNext",
     "lib": [
-      "esnext",
+      "ESNext",
       "DOM"
     ],
     "sourceMap": true,
     "outDir": "dist",
+    "module": "CommonJS",
     "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
-    "noEmit": false,
     "esModuleInterop": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
       "*": [

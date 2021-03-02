@@ -1,7 +1,10 @@
-import YouTubeDownload from "ytdl-core";
+import YouTubeDownloadCore from "ytdl-core";
 import fs from "fs-extra";
+import { config } from "dotenv";
 import { google, youtube_v3 } from "googleapis";
 import * as yup from "yup";
+
+config();
 
 class YouTubeDownloader {
   private YouTube: youtube_v3.Youtube = null;

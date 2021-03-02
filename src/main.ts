@@ -4,14 +4,18 @@ import * as path from "path";
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    height: 600,
+    height: 768,
     webPreferences: {
       nodeIntegration: true,
     },
-    width: 800,
+    width: 1366,
   });
 
   mainWindow.center();
+
+  // mainWindow.menuBarVisible = false;
+  // mainWindow.resizable = false;
+
   mainWindow.loadFile(path.join(__dirname, "app/index.html"));
 }
 

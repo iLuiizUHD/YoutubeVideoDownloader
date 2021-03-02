@@ -8,9 +8,21 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="mini">
-      <h1>Hello world</h1>
-    </div>
+    <main id="app">
+      <h1>{{ hello }} world</h1>
+    </main>
   </body>
-  <script src="js/app.js"></script>
+  <script type="module">
+    import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.esm.browser.js";
+    import youtube from "./js/app.js"
+
+    const App = new Vue({
+      el: "#app",
+      data() {
+        return {
+          hello: "teste",
+        };
+      },
+    });
+  </script>
 </html>
