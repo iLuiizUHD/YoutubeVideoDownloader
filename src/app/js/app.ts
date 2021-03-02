@@ -1,3 +1,1 @@
-import "tailwindcss/tailwind.css";
-
-alert("HELLO");
+console.log("It works");
