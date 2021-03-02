@@ -12,9 +12,13 @@
       <h1>{{ hello }} world</h1>
     </main>
   </body>
-  <script type="module">
+  <script>var exports = {};</script>
+  <script src="./js/app.js"></script>
+  <script type="module" defer>
     import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.esm.browser.js";
-    import youtube from "./js/app.js"
+
+    // Create a new instance of YouTubeDownloader
+    const YTDownloader = new YouTubeDownloader();
 
     const App = new Vue({
       el: "#app",
