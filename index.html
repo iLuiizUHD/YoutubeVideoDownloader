@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Youtube Downloader by: Kowalski Jr</title>
+		<style>
+			body {
+				padding: 0;
+				margin: 0;
+			}
+			#main {
+				position: absolute;
+				top: 0%;
+				left: 0%;
+				min-width: 100%;
+				max-width: 100%;
+				min-height: 100%;
+				max-height: auto;
+			}
+
+			#main nav {
+				position: relative;
+				top: 0%;
+				left: 0%;
+				min-width: 100%;
+				max-width: 100%;
+				border-bottom: 1px solid whitesmoke;
+				color: whitesmoke;
+				text-align: center;
+			}
+
+			#main .container {
+				position: relative;
+				text-align: center;
+				width: 100%;
+				margin-top: 10%;
+				color: whitesmoke;
+			}
+		</style>
+		<link rel="preload" href="style.css" as="style" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div style="opacity: 0" :style="loaded" id="main">
+			<div v-if="loading" class="loader">
+				<div class="loading-component">
+					<div class="tidis-loading-spinner">
+						<svg viewBox="25 25 50 50" class="circular">
+							<circle cx="50" cy="50" r="20" fill="none" class="path"></circle>
+						</svg>
+					</div>
+				</div>
+			</div>
+			<nav>
+				<h1>Youtube Downloader by: Kowalski Jr</h1>
+			</nav>
+			<div class="container">
+				<label for="search_query">Pesquise pelo vídeo ou insira o link!</label><br /><br />
+				<input v-model="search_query" :style="input" @keypress="search_call(event, this)" id="search_query" type="text" />
+				<button id="search_sender" type="button" @click.prevent="search_call({ key: 'Enter' }, this)">Enviar</button>
+				<br /><br />
+				<div class="Videos" style="border: 1px solid white; margin: 10px" v-for="c,y in search_result">
+					<div class="Video-Info">
+						<div class="Thumb">
+							<div><img :src="c.thumb" /></div>
+						</div>
+						<div class="Info">
+							<div class="Title">
+								{{c.title}}
+								<br />
+								<select>
+									<option selected disabled>Selecione a qualidade</option>
+									<option v-for="x in c.qualitys" value="">{{x.qualityLabel}}</option>
+								</select>
+							</div>
+							<!--cu-->
+							<div :ref="'button'+y" class="btn-download" id="btn-download" @click="download(y, [c.id, c.title])">
+								<svg width="22px" height="16px" viewBox="0 0 22 16">
+									<path
+										d="M2,10 L6,13 L12.8760559,4.5959317 C14.1180021,3.0779974 16.2457925,2.62289624 18,3.5 L18,3.5 C19.8385982,4.4192991 21,6.29848669 21,8.35410197 L21,10 C21,12.7614237 18.7614237,15 16,15 L1,15"
+										id="check"
+									></path>
+									<polyline points="4.5 8.5 8 11 11.5 8.5" class="svg-out"></polyline>
+									<path d="M8,1 L8,11" class="svg-out"></path>
+								</svg>
+							</div>
+							<!--SEX-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="module">
+			import Vue from "https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.esm.browser.min.js";
+			const ytdl = require("ytdl-core");
+			const vue = new Vue({
+				el: "#main",
+				data() {
+					return {
+						loaded: "opacity: 0",
+						loading: false,
+						downloader: require("./downloader.js"),
+						input: "color: black",
+						search_query: "",
+						search_result: [],
+					};
+				},
+				methods: {
+					async search_call(key, event) {
+						key = key["key"];
+						if (key === "Enter") {
+							let method;
+							if (String(this.search_query).indexOf("http") > -1) {
+								method = "video";
+							} else {
+								method = "search";
+							}
+							const result = await this.downloader(method, this.search_query);
+							this.search_result = [];
+							for (let c in result) {
+								const qualitys = await ytdl.getInfo(`https://www.youtube.com/watch?v=${result[c].id.videoId}`);
+								let formats = [];
+								var hasAudio = 0;
+								var addedAudio = 0;
+								for (let c in qualitys.formats) {
+									console.log(qualitys.formats);
+									qualitys.formats[
+										c
+									].qualityLabel = `${qualitys.formats[c].qualityLabel} : ${qualitys.formats[c].hasAudio}`;
+									formats.push(qualitys.formats[c]);
+								}
+								this.search_result.push({
+									id: result[c].id.videoId,
+									title: result[c].snippet.title,
+									thumb: result[c].snippet.thumbnails.default.url,
+									qualitys: formats.sort((a, b) => {
+										if (a.qualityLabel < b.qualityLabel) {
+											if (String(a.qualityLabel).indexOf("BitRate") > -1) {
+												var aN = String(a.qualityLabel).split(":")[1];
+											}
+											if (String(b.qualityLabel).indexOf("BitRate") > -1) {
+												var bN = String(b.qualityLabel).split(":")[1];
+											}
+											try {
+												if (Number(aN) < Number(bN)) {
+													return -1;
+												} else {
+													return 1;
+												}
+											} catch (e) {
+												console.log(e);
+												return 0;
+											}
+											return 1;
+										}
+										if (a.qualityLabel > b.qualityLabel) {
+											return -1;
+										}
+										return 0;
+									}),
+								});
+							}
+						} else {
+							if (String(this.search_query).indexOf("http") > -1) {
+								console.log(document.getElementById("search_query").value);
+								this.input = "color: blue;";
+							} else {
+								this.input = "color: black;";
+							}
+						}
+					},
+					async download(y, id, title) {
+						this.loading = true;
+						this.$refs[`button${y}`][0].className = "btn-download downloaded";
+						const res = await this.downloader("download", id);
+						res.on("finish", () => {
+							this.loading = false;
+						});
+					},
+					getId(id) {
+						console.log(this.$refs[`button${id}`]);
+					},
+				},
+				mounted() {
+					this.loaded = "opacity: 1 !important";
+				},
+			});
+		</script>
+	</body>
+</html>

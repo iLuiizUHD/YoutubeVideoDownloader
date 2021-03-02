@@ -1,0 +1,68 @@
+{
+	"name": "youtube.downloader",
+	"productName": "Kowalski Youtube Downloader",
+	"version": "1.0.0",
+	"description": "This app fucks the motherfuckers",
+	"main": "main.js",
+	"build": {
+		"directories": {
+			"buildResources": "resources",
+			"output": "release"
+		}
+	},
+	"scripts": {
+		"start": "dotenv electron .",
+		"pack": "dotenv electron-builder --dir",
+		"dist": "dotenv electron-builder"
+	},
+	"keywords": [],
+	"author": "KowalskiJr",
+	"license": "ISC",
+	"devDependencies": {
+		"@electron-forge/cli": "^6.0.0-beta.54",
+		"@electron-forge/maker-deb": "^6.0.0-beta.54",
+		"@electron-forge/maker-rpm": "^6.0.0-beta.54",
+		"@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+		"@electron-forge/maker-zip": "^6.0.0-beta.54",
+		"@types/electron": "^1.6.10",
+		"autoprefixer": "^10.2.4",
+		"electron": "^11.3.0",
+		"electron-builder": "^22.9.1",
+		"postcss": "^8.2.6",
+		"tailwindcss": "^2.0.3"
+	},
+	"dependencies": {
+		"electron-squirrel-startup": "^1.0.0",
+		"fs-extra": "^8.1.0",
+		"googleapis": "^67.1.0",
+		"vue": "^2.6.12",
+		"ytdl-core": "^4.5.0"
+	},
+	"config": {
+		"forge": {
+			"packagerConfig": {},
+			"makers": [
+				{
+					"name": "@electron-forge/maker-squirrel",
+					"config": {
+						"name": "Kowalski Youtube Video Downloader"
+					}
+				},
+				{
+					"name": "@electron-forge/maker-zip",
+					"platforms": [
+						"darwin"
+					]
+				},
+				{
+					"name": "@electron-forge/maker-deb",
+					"config": {}
+				},
+				{
+					"name": "@electron-forge/maker-rpm",
+					"config": {}
+				}
+			]
+		}
+	}
+}

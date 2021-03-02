@@ -1,0 +1,180 @@
+.Videos {
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: auto;
+	gap: 0px 0px;
+	grid-template-areas: "Video-Info";
+}
+
+.Video-Info {
+	grid-area: Video-Info;
+	display: grid;
+	grid-template-columns: 30% 70%;
+	grid-template-rows: auto;
+	gap: 0px 0px;
+	grid-template-areas: "Thumb Info";
+}
+
+.Thumb {
+	grid-area: Thumb;
+}
+
+.Info {
+	grid-area: Info;
+	display: flex;
+}
+
+.Info .Title {
+	width: 100%;
+	text-align: left;
+}
+
+.Info .Button {
+	margin-top: auto;
+	margin-right: 10px;
+	width: 40%;
+	text-align: right;
+}
+
+.loader {
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	margin: auto;
+	background-color: rgba(0, 0, 0, 0.9);
+	min-width: 100%;
+	min-height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+	display: grid;
+	place-items: center;
+	z-index: 9;
+}
+
+#search_query {
+	width: auto;
+	padding: 5px;
+	border-radius: 20px;
+}
+
+#search_query:focus {
+	outline: none;
+}
+
+/* ROUBADOS */
+
+.loading-component {
+	backdrop-filter: blur(2px) grayscale(0.5);
+}
+.loading-component .tidis-loading-spinner {
+}
+.loading-component .tidis-loading-spinner .circular {
+	margin: auto;
+	height: 35px;
+	width: 35px;
+	animation: loading-rotate 4s linear infinite;
+}
+.loading-component .tidis-loading-spinner .path {
+	animation: loading-dash 1.89s ease-in-out infinite;
+	stroke-dasharray: 90, 150;
+	stroke-dashoffset: 0;
+	stroke-width: 1;
+	stroke: rgb(247, 33, 33);
+	stroke-linecap: round;
+	stroke-width: 7px;
+}
+@keyframes loading-rotate {
+	100% {
+		transform: rotate(3turn);
+	}
+}
+@keyframes loading-dash {
+	0% {
+		stroke-dasharray: 1, 200;
+		stroke-dashoffset: 0;
+	}
+	50% {
+		stroke-dasharray: 90, 150;
+		stroke-dashoffset: -40px;
+	}
+	100% {
+		stroke-dasharray: 90, 150;
+		stroke-dashoffset: -120px;
+	}
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.btn-download {
+	cursor: pointer;
+	display: block;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	-webkit-tap-highlight-color: transparent;
+}
+.btn-download:hover {
+	background: rgba(34, 50, 84, 0.03);
+}
+.btn-download svg {
+	margin: 16px 0 0 16px;
+	fill: none;
+	transform: translate3d(0, 0, 0);
+}
+.btn-download svg polyline,
+.btn-download svg path {
+	stroke: #0077ff;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	transition: all 0.3s ease;
+	transition-delay: 0.3s;
+}
+.btn-download svg path#check {
+	stroke-dasharray: 38;
+	stroke-dashoffset: 114;
+	transition: all 0.4s ease;
+}
+.btn-download.downloaded svg .svg-out {
+	opacity: 0;
+	animation: drop 0.3s linear;
+	transition-delay: 0.4s;
+}
+.btn-download.downloaded svg path#check {
+	stroke: #20cca5;
+	stroke-dashoffset: 174;
+	transition-delay: 0.4s;
+}
+
+@keyframes drop {
+	20% {
+		transform: translate(0, -3px);
+	}
+	80% {
+		transform: translate(0, 2px);
+	}
+	95% {
+		transform: translate(0, 0);
+	}
+}
+.credit {
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	transition: all 0.2s ease;
+	-webkit-user-select: none;
+	user-select: none;
+	opacity: 0.6;
+}
+.credit img {
+	width: 72px;
+}
+.credit:hover {
+	transform: scale(0.95);
+}
