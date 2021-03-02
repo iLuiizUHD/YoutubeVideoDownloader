@@ -5,3 +5,5 @@ release/
 .env
 yarn.lock
 package-lock.json
+build
+dist

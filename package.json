@@ -1,81 +1,36 @@
 {
-	"name": "youtube.downloader",
-	"productName": "Kowalski Youtube Downloader",
-	"version": "1.0.0",
-	"description": "This app fucks the motherfuckers",
-	"main": "main.js",
-	"build": {
-		"directories": {
-			"buildResources": "resources",
-			"output": "release"
-		}
-	},
-	"scripts": {
-		"start": "dotenv electron .",
-		"pack": "dotenv electron-builder --dir",
-		"dist": "dotenv electron-builder"
-	},
-	"keywords": [],
-	"author": "KowalskiJr",
-	"license": "ISC",
-	"devDependencies": {
-		"@electron-forge/cli": "^6.0.0-beta.54",
-		"@electron-forge/maker-deb": "^6.0.0-beta.54",
-		"@electron-forge/maker-rpm": "^6.0.0-beta.54",
-		"@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-		"@electron-forge/maker-zip": "^6.0.0-beta.54",
-		"@types/electron": "^1.6.10",
-		"autoprefixer": "^10.2.4",
-		"electron": "^11.3.0",
-		"electron-builder": "^22.9.1",
-		"postcss": "^8.2.6",
-		"tailwindcss": "^2.0.3",
-		"@typescript-eslint/eslint-plugin": "^4.14.2",
-    "@typescript-eslint/parser": "^4.14.2",
+  "name": "youtube-video-downloader-rewrite",
+  "version": "1.0.1",
+  "description": "The simplest way of downloading videos from YouTube.",
+  "scripts": {
+    "build": "tsc && copyfiles -f src/app/*.html dist/app",
+    "watch": "tsc -w && copyfiles -f src/app/*.html dist/app",
+    "lint": "eslint -c .eslintrc --ext .ts ./src",
+    "start": "npm run build && electron ./dist/main.js"
+  },
+  "devDependencies": {
+    "electron": "^12.0.0",
+    "typescript": "^4.2.2",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
     "dotenv-cli": "^4.0.0",
-    "eslint": "^7.19.0",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
-    "prettier": "^2.2.1"
-	},
-	"dependencies": {
-		"electron-squirrel-startup": "^1.0.0",
-		"fs-extra": "^8.1.0",
-		"googleapis": "^67.1.0",
-		"typescript": "^4.2.2",
-		"vue": "^2.6.12",
-		"ytdl-core": "^4.5.0"
-	},
-	"config": {
-		"forge": {
-			"packagerConfig": {},
-			"makers": [
-				{
-					"name": "@electron-forge/maker-squirrel",
-					"config": {
-						"name": "Kowalski Youtube Video Downloader"
-					}
-				},
-				{
-					"name": "@electron-forge/maker-zip",
-					"platforms": [
-						"darwin"
-					]
-				},
-				{
-					"name": "@electron-forge/maker-deb",
-					"config": {}
-				},
-				{
-					"name": "@electron-forge/maker-rpm",
-					"config": {}
-				}
-			]
-		}
-	}
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0"
+  },
+  "dependencies": {
+    "fs-extra": "^9.1.0",
+    "googleapis": "^67.1.1",
+    "postcss": "^8.2.6",
+    "prettier": "^2.2.1",
+    "tailwindcss": "^2.0.3",
+    "vue": "^2.6.12",
+    "ytdl-core": "^4.5.0",
+    "yup": "^0.32.9"
+  }
 }

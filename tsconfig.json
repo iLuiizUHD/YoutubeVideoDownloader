@@ -1,29 +1,37 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "target": "esnext",
     "lib": [
-      "esnext"
+      "esnext",
+      "DOM"
     ],
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
+    "noEmit": false,
     "esModuleInterop": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "baseUrl": ".",
     "paths": {
+      "*": [
+        "node_modules/*"
+      ],
       "@src/*": [
         "src/*"
+      ],
+      "@bin/*": [
+        "src/bin/*"
       ]
     }
   },
   "include": [
-    "**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.html"
   ],
   "exclude": [
     "node_modules"
